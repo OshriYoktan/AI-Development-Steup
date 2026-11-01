@@ -276,6 +276,18 @@ Responsibilities:
 Focus on actionable findings with severity and affected files.
 This Skill should support read-only review wherever possible.
 Do not create Skills that duplicate the same workflow without providing meaningful additional value.
+### 8. Concurrency, Cancellation and Race Condition Safety
+- Always inspect asynchronous operations for race conditions, concurrency issues, and unnecessary work.
+- Frontend (React / TypeScript):
+- Use AbortController to cancel outdated or unnecessary HTTP requests when appropriate, especially in useEffect cleanup, component unmounts, and when newer requests replace older ones.
+- Prevent stale responses from overwriting newer data or updating state after a component has unmounted.
+- Handle request cancellation separately from actual errors. Do not display cancellation as a normal application error.
+- Avoid duplicate requests and conflicting state updates where appropriate.
+- Backend (.NET / C#):
+- Accept and propagate CancellationToken through Controllers, Services, Repositories, and supported asynchronous operations.
+- Pass the token to EF Core, database queries, and other APIs that support cancellation.
+- Do not silently swallow OperationCanceledException.
+- Respect client disconnections and request cancellations whenever supported by the underlying framework and dependencies.
 ---
 # PHASE 4 — CREATE SPECIALIZED AGENTS
 Create the following reusable Agents where the current tool supports them.
