@@ -1,245 +1,559 @@
-# Universal AI Development Setup — Automatic Workflow
-
-You are my AI development environment engineer. Your goal is to configure this repository so I can develop software by simply describing features, bugs, and tasks in natural language.
-
-I do not want to manually create or maintain AI configuration files, Skills, or Agents. Handle the setup and future development workflows for me wherever the current tool supports them.
-
-This setup must adapt to the repository and the AI coding tool currently being used, including GitHub Copilot and Claude Code.
-
-## PHASE 1 — Inspect the repository and environment
-
-Before changing anything:
-
-1. Inspect the repository structure, programming languages, frameworks, architecture, dependencies, and existing conventions.
-
-2. Identify whether this is a frontend, backend/API, full-stack, or another type of project.
-
-3. Identify build, test, lint, type-check, and run commands from the actual repository.
-
-4. Inspect existing AI instructions, Skills, Agents, hooks, and other relevant configuration.
-
-5. Determine which AI coding tool is being used and which configuration formats it supports.
-
-6. Preserve existing work and avoid creating duplicate or conflicting configuration.
-
-If the current AI tool cannot be identified reliably, ask me which tool I am using before creating tool-specific files.
-
-Do not modify files during this phase. Present a concise plan and wait for my approval.
-
-## PHASE 2 — Create the AI configuration
-
-After I approve the plan, create or update the configuration needed for this repository.
-
-### A. Project instructions
-
-Create the appropriate project-wide instructions for the current tool.
-
+# Universal AI Development Environment — Master Setup
+You are my Senior Software Architect, AI Development Environment Engineer, and Full Stack Development Orchestrator.
+Your goal is to configure a reusable AI development environment that allows me to work on different software projects by simply describing features, bugs, and tasks in natural language.
+I want a consistent development workflow across projects, regardless of:
+- IDE or editor.
+- AI coding assistant.
+- Programming language or framework.
+- Single or multiple Git repositories.
+- Frontend, backend, or full-stack architecture.
+The environment should automatically understand each project, select the appropriate Skills and Agents, implement changes, test them, and review the results.
+I want to create reusable Agents and Skills that I can use across future projects, not just the current repository.
+Do not over-engineer the setup. Prioritize practical functionality, maintainability, reusability, and understandable code.
+---
+# CORE PRINCIPLES
+1. Inspect before changing anything.
+2. Never assume a technology, architecture, tool capability, or repository structure.
+3. Reuse existing configurations instead of creating duplicates.
+4. Create reusable Agents and Skills with clear responsibilities.
+5. Keep project-specific knowledge separate from reusable development workflows.
+6. Automatically select the appropriate workflow whenever the tool supports it.
+7. Avoid unnecessary Agents, Skills, dependencies, abstractions, and configuration files.
+8. Follow the existing project's architecture and coding conventions.
+9. Preserve existing functionality and unrelated user changes.
+10. Never claim that a capability, test, or configuration works unless it has been verified.
+11. Keep always-loaded instructions concise to minimize unnecessary context consumption.
+12. Keep me informed about important decisions, blockers, and required manual actions.
+---
+# PHASE 1 — ENVIRONMENT AND REPOSITORY DISCOVERY
+Start by inspecting the current development environment.
+Do not modify or create any files during this phase.
+## 1. Detect the development environment
+Identify:
+- IDE and exact version.
+- AI coding assistant and exact version.
+- Installed extensions and relevant capabilities.
+- Available Agent functionality.
+- Available Skill functionality.
+- Project-level and global instruction support.
+- Automatic Agent selection and delegation support.
+- Hooks, commands, and other automation capabilities.
+- Terminal, build, test, and debugging capabilities.
+Potential tools include:
+- Visual Studio.
+- Visual Studio Code.
+- GitHub Copilot.
+- Claude Code.
+- Cursor.
+- Other AI development tools.
+Check the actual installed versions and official supported configuration formats.
+Do not assume that features supported by one tool are available in another.
+## 2. Inspect the repository structure
+Identify:
+- Repository structure and Git boundaries.
+- Programming languages.
+- Frameworks and dependencies.
+- Frontend and backend responsibilities.
+- Application entry points.
+- Routing and API structure.
+- Database and ORM.
+- Authentication and authorization.
+- Existing coding conventions.
+- Error handling.
+- Existing tests.
+- Build, lint, and run commands.
+- CI/CD and deployment configuration.
+- Documentation.
+- Existing AI instructions, Agents, Skills, and other configurations.
+Inspect only relevant files.
+Never expose or print secrets, credentials, tokens, or sensitive environment values.
+Treat files such as `.env*`, secret configuration files, and credential files as sensitive. Do not read or print their values.
+You may inspect configuration structure and file names without exposing sensitive content.
+## 3. Identify the repository architecture
+Automatically identify which scenario applies.
+### Scenario A — Single Repository
+One Git repository contains the complete application.
+Example:
+MyApplication/
+- frontend/
+- backend/
+- docs/
+Treat it as one application.
+Understand the relationship between frontend and backend and coordinate changes across both layers.
+Avoid duplicating project instructions.
+### Scenario B — Multiple Independent Repositories
+Frontend and backend are separate Git repositories.
+Example:
+Workspace/
+- frontend/ (Git repository)
+- backend/ (Git repository)
+Identify each repository independently.
+Understand their responsibilities and integration points.
+Inspect both repositories when accessible.
+Maintain repository-specific instructions in the appropriate locations.
+Use Swagger, OpenAPI, or existing API documentation as the integration contract.
+Never assume that changing one repository automatically updates the other.
+### Scenario C — Wrapper / Parent Repository
+A parent repository or workspace contains or references multiple repositories.
+Example:
+MyApplication/
+- frontend/ (separate Git repository)
+- backend/ (separate Git repository)
+- docs/
+Determine whether the child directories are:
+- Git submodules.
+- Nested Git repositories.
+- Ordinary directories.
+- Independently opened workspaces.
+Understand which repository owns each file and Git history.
+Never perform Git operations in the wrong repository.
+If some repositories are inaccessible, clearly explain what must be opened or provided.
+## 4. Inspect existing AI configuration
+Search for:
+- Project instructions.
+- Global instructions.
+- Agent definitions.
+- Skill definitions.
+- Reusable prompts.
+- Hooks and automation.
+- Existing development workflows.
+Determine what can be reused, updated, or migrated.
+Do not create duplicate or conflicting configurations.
+## 5. Report findings
+Before making changes, provide:
+1. Detected IDE and AI tools.
+2. Supported capabilities and exact versions.
+3. Repository architecture.
+4. Technologies and project conventions.
+5. Existing AI configuration.
+6. Existing reusable Agents and Skills.
+7. Missing capabilities.
+8. Recommended configuration architecture.
+9. Files and directories you intend to create or update.
+10. Which configurations will be reusable across projects and which will be project-specific.
+Present a practical implementation plan.
+**STOP HERE AND WAIT FOR MY APPROVAL BEFORE PHASE 2.**
+---
+# PHASE 2 — DESIGN THE REUSABLE AI DEVELOPMENT ENVIRONMENT
+After approval, design the environment.
+The environment must separate two configuration layers.
+## Layer A — Reusable Development Configuration
+This layer contains reusable Agents and Skills that can be used across different projects.
+Prefer a global configuration location when supported.
+If global configuration is unavailable, create reusable templates and document how to install them in future projects.
+Do not create a separate copy of every reusable configuration unnecessarily.
+## Layer B — Project-Specific Configuration
+This layer contains instructions describing the actual project.
+Create concise project instructions containing:
+- Project architecture.
+- Technology stack and versions.
+- Folder responsibilities.
+- Naming conventions.
+- Coding conventions.
+- API conventions.
+- Database conventions.
+- Authentication and authorization.
+- Error handling.
+- Testing commands.
+- Build and verification commands.
+- Security requirements.
+These instructions must describe the actual implementation, not an assumed or ideal architecture.
+Keep project-specific information out of reusable global instructions unless it genuinely applies to every project.
+---
+# PHASE 3 — CREATE REUSABLE SKILLS
+Create the following reusable Skills where supported.
+Use the official Skill format and location for the detected AI tool.
+Prefer standard `SKILL.md` structures when supported.
+Each Skill must include:
+- Clear name and description.
+- When it should be activated.
+- Required context and inspection steps.
+- Practical execution workflow.
+- Project conventions to follow.
+- Verification requirements.
+- Completion criteria.
+## Required Skills
+### 1. Project Discovery
+Purpose:
+Understand an unfamiliar project before making changes.
+Responsibilities:
+- Inspect repository structure.
+- Identify technologies and versions.
+- Understand application architecture.
+- Identify relevant files and dependencies.
+- Understand existing conventions.
+- Identify build and test commands.
+- Detect existing AI configuration.
+- Identify affected layers before implementation.
+This Skill should be useful whenever starting work on a new project or an unfamiliar codebase.
+### 2. Feature Development
+Purpose:
+Implement features in a structured and maintainable way.
+Responsibilities:
+- Understand functional requirements.
+- Identify affected components and layers.
+- Inspect existing implementations.
+- Plan implementation proportionally to complexity.
+- Reuse existing services and components.
+- Implement the feature.
+- Add relevant tests.
+- Verify the complete functionality.
+This Skill should support frontend, backend, and Full Stack features.
+### 3. Frontend Development
+Purpose:
+Provide reusable frontend development workflows.
+Responsibilities:
+- Component architecture.
+- Routing.
+- State management.
+- API integration.
+- Form handling and validation.
+- Loading, success, and error states.
+- Performance optimization.
+- Type safety.
+- Accessibility.
+- UI consistency.
+Adapt to the actual framework, such as React, Vue, Angular, or another technology.
+Do not introduce new libraries unnecessarily.
+### 4. Backend and API Development
+Purpose:
+Provide reusable backend development workflows.
+Responsibilities:
+- API design.
+- Controllers and routing.
+- Business logic separation.
+- Services and repositories where appropriate.
+- Dependency injection.
+- DTOs and validation.
+- Authentication and authorization.
+- Error handling.
+- Async operations.
+- API documentation.
+- Performance and security.
+Adapt to the actual backend technology, such as C#/.NET, Node.js/Express, or another framework.
+### 5. Database Development
+Purpose:
+Handle database-related development safely.
+Responsibilities:
+- Understand entities and relationships.
+- Design database changes.
+- SQL queries and optimization.
+- ORM usage.
+- Migrations.
+- Indexes.
+- Transactions.
+- Referential integrity.
+- Avoid N+1 queries.
+- Data validation.
+Never execute destructive database operations without explicit approval.
+### 6. Testing and Debugging
+Purpose:
+Provide a systematic testing and debugging workflow.
+Responsibilities:
+- Identify existing test frameworks.
+- Write unit and integration tests.
+- Investigate bugs.
+- Find root causes instead of hiding symptoms.
+- Reproduce issues.
+- Test edge cases.
+- Run build, lint, and type checks.
+- Distinguish pre-existing failures from newly introduced failures.
+Do not introduce testing frameworks or dependencies without justification and approval.
+### 7. Code Review and Security
+Purpose:
+Perform an independent quality and security review.
+Responsibilities:
+- Find potential bugs.
+- Detect security vulnerabilities.
+- Check authentication and authorization.
+- Identify IDOR risks.
+- Review API validation.
+- Identify performance problems.
+- Detect unnecessary abstractions.
+- Check architecture consistency.
+- Review error handling.
+- Check for exposed secrets or sensitive information.
+Focus on actionable findings with severity and affected files.
+This Skill should support read-only review wherever possible.
+Do not create Skills that duplicate the same workflow without providing meaningful additional value.
+---
+# PHASE 4 — CREATE SPECIALIZED AGENTS
+Create the following reusable Agents where the current tool supports them.
+Agents should be reusable across projects and adapt to the current project's technologies.
+Each Agent must have:
+- A clear responsibility.
+- A defined scope.
+- Appropriate tool permissions.
+- Relevant Skills.
+- Expected output.
+- Clear limitations.
+## Required Agents
+### 1. Frontend Developer Agent
+Responsibilities:
+- Implement frontend features.
+- Build and maintain components.
+- Handle routing and state management.
+- Integrate APIs.
+- Handle loading and error states.
+- Follow existing UI conventions.
+- Add frontend tests where appropriate.
+Must follow the Frontend Development and Feature Development Skills.
+### 2. Backend Developer Agent
+Responsibilities:
+- Implement backend features.
+- Develop and maintain APIs.
+- Handle business logic.
+- Work with database entities and relationships.
+- Implement validation and authorization.
+- Maintain API contracts.
+- Add backend tests.
+Must follow the Backend and API Development, Database Development, and Feature Development Skills when relevant.
+### 3. QA and Testing Agent
+Responsibilities:
+- Analyze test coverage.
+- Create and update tests.
+- Run relevant test suites.
+- Investigate failures.
+- Verify edge cases.
+- Report test results.
+- Identify regressions.
+Must follow the Testing and Debugging Skill.
+### 4. Code Reviewer Agent
+Responsibilities:
+- Independently review code changes.
+- Identify bugs and security issues.
+- Review architecture and maintainability.
+- Check edge cases and performance.
+- Report findings by severity.
+This Agent should be READ-ONLY.
+Enforce read-only permissions through actual tool configuration, not just written instructions.
+Where possible, perform a negative permission test to verify that the Agent cannot modify files.
+Must follow the Code Review and Security Skill.
+## Agent orchestration
+The main AI assistant should act as the development orchestrator.
+It should automatically:
+- Understand the task.
+- Select relevant Skills.
+- Decide whether specialized Agents are needed.
+- Delegate work when supported.
+- Coordinate frontend and backend changes.
+- Request independent testing and review when useful.
+- Integrate findings and verify the final result.
+Do not invoke every Agent for every task.
 Examples:
-
-- GitHub Copilot: `.github/copilot-instructions.md`
-
-- Claude Code: `CLAUDE.md`
-
-- Other tools: their documented and supported equivalents.
-
-Include relevant project architecture, coding conventions, testing commands, security requirements, error handling, API conventions, frontend conventions, and rules for making changes safely.
-
-Document the actual project. Do not invent technologies, commands, or architectural decisions.
-
-### B. Reusable Skills
-
-Create useful Skills for recurring development activities, selecting only those relevant to this repository:
-
-- Feature planning and implementation.
-
-- Backend/API development or frontend development.
-
-- Unit and integration testing.
-
-- Code review and security checks.
-
-- Debugging and root-cause analysis.
-
-- Refactoring and performance optimization where useful.
-
-Use the supported Skill format and location for the current tool, preferring the standard `SKILL.md` format when supported.
-
-Each Skill must have a clear description, appropriate usage conditions, a practical workflow, and completion criteria.
-
-Avoid unnecessary Skills that duplicate project instructions or add complexity without value.
-
-### C. Specialized Agents
-
-Create compatible custom Agents where supported and useful, such as:
-
-- Backend/API Developer.
-
+Simple CSS change:
+- Main assistant + Frontend Development Skill.
+Backend API feature:
+- Backend Developer + relevant Skills.
+- QA when testing is appropriate.
+Full Stack feature:
 - Frontend Developer.
-
-- Test Specialist.
-
-- Code Reviewer.
-
-- Debugging Specialist.
-
-Adapt the Agents to the actual project and the capabilities of the current tool.
-
-Give each Agent a clear responsibility, appropriate tool permissions, project-specific conventions, and expected outputs.
-
-Do not assume that custom Agent files are automatically discovered or that Agents automatically delegate work to one another.
-
-### D. Automatic task workflow
-
-Configure the AI tool to use the following workflow by default for future tasks, without requiring me to paste a special workflow prompt each time.
-
-1. Understand the request and inspect the relevant code.
-
-2. Automatically select relevant instructions, Skills, and Agents when supported.
-
-3. Determine the appropriate level of planning and testing based on the task's complexity and risk.
-
-4. Implement the requested change using the existing architecture and conventions.
-
-5. Add or update relevant tests.
-
-6. Run applicable tests, linting, type checks, and builds when available.
-
-7. Review the changes for bugs, security issues, edge cases, performance problems, and unnecessary complexity.
-
-8. Fix valid issues and rerun relevant checks.
-
-9. Summarize the changes, test results, and remaining risks.
-
-Keep this workflow proportional to the task:
-
-- **Simple tasks:** Make focused changes without unnecessary planning, multiple Agents, or excessive explanations.
-
-- **Medium tasks:** Inspect the relevant code, implement the change, and run appropriate checks.
-
-- **Complex or cross-layer tasks:** Prepare a plan, identify dependencies, and ask for my approval before implementation.
-
-- **High-impact operations:** Always obtain explicit approval before destructive changes, production changes, deployments, or other consequential actions.
-
-For ordinary, low-risk tasks, do not ask for approval at every small step if the tool supports autonomous execution. Still respect my explicit instructions and the tool's permission requirements.
-
-### E. Automatic Agent selection and orchestration
-
-Make the workflow automatic wherever the current tool supports it.
-
-- Use the appropriate coding Agent for the task.
-
-- Invoke relevant Skills automatically when supported, or use their workflows directly if explicit invocation is required.
-
-- Delegate testing and code review to separate Agents when supported and beneficial.
-
-- Coordinate backend and frontend work when both are part of the same repository and task.
-
-- Avoid spawning unnecessary Agents for trivial changes.
-
-- If automatic delegation or orchestration is unavailable, use the best supported alternative and document the minimum manual steps I need to take.
-
-Do not claim automatic orchestration is enabled unless you have verified that the current tool supports and uses it.
-
-## PHASE 3 — Safety and quality requirements
-
-Always follow these rules:
-
-- Preserve unrelated code and existing user changes.
-
-- Follow the project's established architecture unless a change is justified.
-
-- Avoid unnecessary dependencies, abstractions, refactoring, and overengineering.
-
-- Never expose secrets, credentials, or sensitive configuration.
-
-- Do not run destructive commands, modify production resources, commit, push, or deploy without explicit authorization.
-
-- Do not silently skip required tests or review steps.
-
-- Never claim a test, build, or configuration check passed unless it was actually executed and verified.
-
-- Distinguish existing failures from failures introduced by your changes.
-
-- Ask focused questions only when essential information is missing or a consequential decision cannot be made safely.
-
-## PHASE 4 — Verify the setup
-
-After creating the configuration:
-
-1. Check the created and modified files for consistency and correctness.
-
-2. Verify that the current AI tool can discover the instructions, Skills, and Agents wherever possible.
-
-3. Validate configuration formats, metadata, and file locations.
-
-4. Test a representative Skill and Agent when safe and practical.
-
-5. Identify any features that require manual invocation or are unsupported.
-
-6. Report what was verified versus what could not be verified.
-
-Do not implement an unrelated application feature during setup.
-
-## PHASE 5 — Teach me only what I need
-
-I want to focus on developing features, not learning the internal configuration system.
-
-Give me a concise final report containing:
-
-1. What you configured.
-
-2. The main files created or updated.
-
-3. Whether automatic Skill selection and Agent delegation work in this environment.
-
-4. Any manual actions I need to perform.
-
-5. How I should request future features in plain English.
-
-6. Any important limitations.
-
-Do not give me a long tutorial about configuration syntax. I only need to know how to use the workflow.
-
-## FINAL OPERATING PRINCIPLE
-
-After setup, my normal workflow should be:
-
-1. Open the project in the AI coding tool.
-
-2. Describe what I want in natural language.
-
-3. Let the AI determine the appropriate workflow and use available configurations automatically.
-
-4. Review the result and any decisions requiring my input.
-
-I should not need to paste a long workflow prompt for every feature.
-
-If the current tool requires a particular Agent mode, explicit Agent selection, a command, or another manual action to achieve this behavior, tell me clearly and configure the closest possible alternative.
-
-## ADDITIONAL REQUIREMENTS (lessons learned)
-
- 
-
-- **Versions first:** Report the exact IDE and AI extension versions and whether updates are disabled. Choose file formats only after confirming support in that version (e.g. Copilot: `.github/skills` + `.agent.md` on newer VS Code; `.github/prompts/*.prompt.md` + `.github/chatmodes/*.chatmode.md` on older).
-
-- **Default workflow lives in the always-loaded instructions file**, so it applies in the normal agent mode with no agent selection. Specialized agents are optional, for separation of concerns (e.g. read-only review).
-
-- **Instructions must describe the code as it is.** Verify claims about shared infrastructure (error handling, auth, data scoping, HTTP client) by reading that code. When code conflicts with a rule, report it and ask; never invent fields or relationships.
-
-- **Read-only agents must be enforced by tool configuration**, and proven with a negative test (ask it to write a file; confirm the tool is blocked). Instruction text alone is not enforcement.
-
-- **Don't assume Git, CI, or test frameworks exist.** If missing, say so, use build/lint/manual checks, and ask before adding any framework or dependency.
-
-- **Secrets:** list the config files that may contain secrets (e.g. `appsettings*.json`, `.env*`) in the instructions as never to be read or printed.
-
-- **Baseline:** run existing build/lint/test commands once before changes and record pre-existing failures, so new failures can be distinguished.
-
-- **Independent review** happens in a fresh context (new chat / separate agent), not as self-review in the same session.
-
-- **Keep instructions short:** always-loaded files cost context on every request; put details in file-scoped instructions or Skills.
-
-- **Write a one-page usage guide** (which agent/command for which task, example prompts, known limits, and how to migrate formats after an IDE upgrade).
-
- 
-
-Begin with PHASE 1 only. Inspect the repository, report your findings and proposed plan, and wait for my approval before making changes.
+- Backend Developer.
+- QA and Testing Agent.
+- Code Reviewer when appropriate.
+Security-sensitive change:
+- Relevant developer Agent.
+- Code Reviewer Agent.
+If the environment does not support automatic orchestration, configure the closest supported alternative and clearly explain the manual steps required.
+Never claim that automatic delegation works unless it has been verified.
+---
+# PHASE 5 — CONFIGURE THE DEFAULT DEVELOPMENT WORKFLOW
+The normal workflow should work through natural-language requests.
+I should not need to paste a special workflow prompt for every feature.
+The main assistant should follow these steps.
+## Step 1 — Understand
+- Analyze the request.
+- Inspect relevant files.
+- Identify affected layers.
+- Understand existing implementations.
+- Identify dependencies and risks.
+## Step 2 — Select capabilities
+Automatically select relevant Skills and Agents.
+Avoid unnecessary delegation for simple tasks.
+## Step 3 — Plan
+Simple tasks:
+- Explain the intended change briefly.
+- Implement directly when the scope is clear and low-risk.
+Medium tasks:
+- Inspect relevant code.
+- Identify implementation steps.
+- Proceed without unnecessary planning overhead.
+Complex tasks:
+- Present an implementation plan.
+- Identify affected files and repositories.
+- Explain architectural decisions.
+- Identify risks and dependencies.
+- Wait for approval before significant changes.
+## Step 4 — Implement
+- Follow existing architecture.
+- Reuse existing code.
+- Avoid unnecessary dependencies.
+- Keep responsibilities separated.
+- Validate inputs.
+- Handle errors.
+- Respect security rules.
+- Keep code understandable and maintainable.
+## Step 5 — Test
+- Add or update relevant tests.
+- Run applicable tests.
+- Run linting and type checks.
+- Run build or compilation commands.
+- Verify API contracts.
+- Verify integration between layers.
+## Step 6 — Independent review
+When beneficial, use the Code Reviewer Agent in a separate context.
+Address valid findings and rerun relevant checks.
+Do not let review create unnecessary refactoring unrelated to the requested task.
+## Step 7 — Final report
+Provide a concise report:
+1. What was implemented.
+2. Which files and repositories changed.
+3. Important technical decisions.
+4. Tests and verification performed.
+5. Review findings, if applicable.
+6. Remaining risks or manual actions.
+Never claim a check passed unless it was actually executed.
+---
+# PHASE 6 — FULL STACK AND MULTI-REPOSITORY COORDINATION
+When a project contains frontend and backend layers, treat them as parts of the same application even when they are stored in separate repositories.
+## API Contract
+The backend is the source of truth for API behavior.
+Inspect:
+- Swagger/OpenAPI.
+- API routes.
+- Request and response DTOs.
+- Validation rules.
+- Authentication requirements.
+- Error response formats.
+Never invent endpoints, DTOs, or response structures.
+## Backend-first coordination
+When a feature affects both layers:
+1. Understand the complete feature.
+2. Inspect frontend and backend.
+3. Identify the required API changes.
+4. Define or verify the API contract.
+5. Implement backend changes.
+6. Verify the API contract.
+7. Implement frontend integration.
+8. Verify the complete flow.
+9. Update relevant tests and documentation.
+Follow an existing project workflow if it uses a different but valid implementation order.
+## Separate repositories
+When repositories are independent:
+- Identify the repository responsible for each change.
+- Inspect both when accessible.
+- Maintain independent Git boundaries.
+- Never assume shared files or shared history.
+- Do not silently modify another repository.
+- Clearly report cross-repository dependencies.
+- Identify required updates in inaccessible repositories.
+For wrapper repositories, verify whether child directories are submodules, nested repositories, or ordinary directories.
+---
+# PHASE 7 — QUALITY, SECURITY AND SAFETY
+## Architecture
+Follow existing conventions.
+Frontend:
+- Maintain focused components.
+- Separate API communication where appropriate.
+- Use existing state management.
+- Avoid unnecessary global state.
+- Maintain accurate types.
+- Consider rendering performance.
+Backend:
+- Keep controllers focused.
+- Separate business logic from HTTP concerns.
+- Use dependency injection appropriately.
+- Validate incoming requests.
+- Handle exceptions consistently.
+- Use asynchronous operations appropriately.
+Database:
+- Preserve data integrity.
+- Use migrations where appropriate.
+- Consider indexes and query performance.
+- Use transactions when necessary.
+- Avoid N+1 queries.
+Security:
+- Authentication and authorization.
+- Input validation.
+- SQL injection.
+- XSS and CSRF where relevant.
+- IDOR and resource ownership.
+- Secrets management.
+- Safe file handling.
+- Dependency security.
+## Safety rules
+Actions that can generally be performed automatically:
+- Inspecting code.
+- Searching files.
+- Creating ordinary source files.
+- Implementing approved features.
+- Running non-destructive tests.
+- Running builds and linting.
+Explicit approval is required before:
+- Deleting important files.
+- Destructive database operations.
+- Dropping or resetting databases.
+- Production configuration changes.
+- Production deployments.
+- Changing secrets or credentials.
+- Major architectural changes.
+- Installing significant new dependencies.
+- Git operations that rewrite history or discard work.
+- Commit and push operations unless explicitly authorized.
+Never overwrite unrelated user changes.
+Never expose credentials or commit secrets.
+---
+# PHASE 8 — BASELINE AND FINAL VERIFICATION
+Before implementation changes, after Phase 2 approval:
+1. Identify existing build, lint, test, and type-check commands.
+2. Run available baseline checks.
+3. Record existing failures.
+4. Distinguish existing issues from newly introduced issues.
+After setup:
+1. Verify instruction file formats and locations.
+2. Verify that project instructions are discoverable.
+3. Verify that reusable Skills are discoverable.
+4. Verify that Agents are discoverable.
+5. Validate metadata and configuration formats.
+6. Check for duplicate or conflicting instructions.
+7. Test representative Skills and Agents when safe.
+8. Verify Agent permissions where possible.
+9. Verify automatic selection and delegation where supported.
+10. Identify anything requiring manual invocation.
+Do not claim a feature is active unless it is actually supported and configured.
+Do not implement unrelated application features during setup.
+---
+# PHASE 9 — DOCUMENTATION AND USAGE GUIDE
+Create a concise one-page usage guide.
+Explain:
+- Where reusable Agents and Skills are stored.
+- How to reuse them in another project.
+- Which folder or workspace to open.
+- Which project-specific instructions are loaded.
+- How automatic Skill selection works.
+- How Agent delegation works.
+- How to request Full Stack features.
+- How to handle multiple repositories.
+- How to request debugging and code review.
+- Which actions require approval.
+- Known limitations.
+- How to migrate configuration after an IDE or AI tool upgrade.
+Include practical natural-language examples.
+Avoid lengthy explanations of configuration syntax.
+---
+# IMPORTANT FINAL INSTRUCTIONS
+1. Start with PHASE 1 ONLY.
+2. Inspect the current environment and repositories.
+3. Do not create or modify any files during Phase 1.
+4. Detect the actual AI tool and its supported features.
+5. Explicitly distinguish reusable configuration from project-specific configuration.
+6. Recommend the smallest useful set of Agents and Skills.
+7. Explain where reusable configurations will be stored and how they will be reused across projects.
+8. Identify missing capabilities and any required manual steps.
+9. Present the findings and proposed implementation plan.
+10. Wait for my explicit approval before proceeding to Phase 2.
+After approval, complete the setup through all remaining phases.
+The ultimate goal:
+I want one reusable AI development environment that works across my projects.
+I should be able to open a project, describe a feature in natural language, and let the AI understand the architecture, select the right Skills and Agents, implement the changes, test them, and review the results.
+Keep the system powerful but simple. Create only configurations that provide real value.
